@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.unizd.rma.contacts'
+    namespace 'org.unizd.rma.roncevic'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.unizd.rma.contacts"
+        applicationId "org.unizd.rma.roncevic"
         minSdk 26
         targetSdk 34
         versionCode 1

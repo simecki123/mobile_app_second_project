@@ -1,4 +1,4 @@
-package com.unizd.rma.contacts
+package org.unizd.rma.roncevic
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

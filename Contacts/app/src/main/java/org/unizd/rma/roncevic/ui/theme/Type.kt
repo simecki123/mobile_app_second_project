@@ -1,4 +1,4 @@
-package com.unizd.rma.contacts.ui.theme
+package org.unizd.rma.roncevic.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

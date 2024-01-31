@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Contacts"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="org.unizd.rma.roncevic.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Contacts">
