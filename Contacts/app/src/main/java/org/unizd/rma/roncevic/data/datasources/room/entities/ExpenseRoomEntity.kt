@@ -26,7 +26,7 @@ fun ExpenseRoomEntity.toExpenseResponseEntity(): ExpenseResponseEntity {
         name = name,
         amount = amount,
         category = category,
-        date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+        date = date,
         imageUri = Uri.parse(imageUri)
 
     )

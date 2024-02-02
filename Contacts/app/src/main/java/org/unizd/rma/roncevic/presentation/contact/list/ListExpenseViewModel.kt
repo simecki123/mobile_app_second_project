@@ -15,7 +15,7 @@ data class ExpenseListResponseModel(
     val name: String,
     val amount: String,
     val category: String,
-    val date: LocalDate,
+    val date: String,
     val imageUri: Uri
 )
 
@@ -44,14 +44,18 @@ class ListExpenseViewModel @Inject constructor(
     val expenses: List<ExpenseListResponseModel>
         get() = _expenses.toList()
 
+    // doesnt start at all for some reason. Like I dont use it at all
     suspend fun getExpenses() {
+
         try {
+            println("Uspilo")
             _expenses.clear()
             val list = getAllExpenseUseCase.execute()
             _expenses.addAll(list.map {
                 it.toExpenseListResponseModel()
             })
         }catch (e: Exception) {
+            println("Nije upilo")
             _errorMessage.value = "Greška ${e.message}"
         }
     }

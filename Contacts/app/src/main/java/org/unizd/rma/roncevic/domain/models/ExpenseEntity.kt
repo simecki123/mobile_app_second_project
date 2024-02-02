@@ -2,6 +2,7 @@ package org.unizd.rma.roncevic.domain.models
 
 import android.net.Uri
 import java.time.LocalDate
+import java.util.Date
 
 
 data class ExpenseResponseEntity(
@@ -9,7 +10,7 @@ data class ExpenseResponseEntity(
     val name: String,
     val amount: Double,
     val category: String,
-    val date: LocalDate,
+    val date: String,
     val imageUri: Uri
 )
 

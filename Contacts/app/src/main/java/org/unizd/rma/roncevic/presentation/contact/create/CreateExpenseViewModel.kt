@@ -66,6 +66,7 @@ class CreateExpenseViewModel @Inject constructor(
                 ExpenseRequestEntity(id = null, name = _name.value,
                 amount = _amount.value.toDouble(), category = _category.value, date =_date.value, imageUri = _imageUri.value)
             )
+
         } catch (e: Exception) {
             _errorMessage.value = "Error ${e.message}"
         }

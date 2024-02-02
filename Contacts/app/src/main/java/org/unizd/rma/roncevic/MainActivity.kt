@@ -52,16 +52,16 @@ fun Router(navController: NavHostController) {
         startDestination = "list") {
 
         composable("list"){
-            val listContactsViewModel: ListExpenseViewModel = hiltViewModel()
+            val listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
             ListExpenseScreen(navController = navController,
-                listContactsViewModel
+                listExpenseViewModel
             )
         }
 
         composable("create") {
-            val createContactViewModel: CreateExpenseViewModel = hiltViewModel()
+            val createExpenseViewModel: CreateExpenseViewModel = hiltViewModel()
             CreateExpenseScreen(navController = navController,
-                createContactViewModel)
+                createExpenseViewModel)
         }
     }
 }

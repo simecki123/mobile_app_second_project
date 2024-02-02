@@ -22,7 +22,7 @@ import org.unizd.rma.roncevic.R
 @Composable
 fun ListExpenseScreen(
     navController: NavController,
-    listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
+    listExpenseViewModel: ListExpenseViewModel = hiltViewModel<ListExpenseViewModel>()
 ) {
     LaunchedEffect(Unit,
         block = {
@@ -85,3 +85,5 @@ fun ListExpenseScreen(
         }
     }
 }
+
+
