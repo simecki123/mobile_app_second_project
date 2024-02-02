@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -15,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.unizd.rma.roncevic.presentation.contact.create.CreateExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.create.CreateExpenseViewModel
+import org.unizd.rma.roncevic.presentation.contact.details.DetailsExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseViewModel
 import org.unizd.rma.roncevic.ui.theme.ExpenseTheme
@@ -48,21 +50,43 @@ fun DefaultPreview() {
 
 @Composable
 fun Router(navController: NavHostController) {
-    NavHost(navController = navController,
-        startDestination = "list") {
+    val listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
 
-        composable("list"){
-            val listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
-            ListExpenseScreen(navController = navController,
-                listExpenseViewModel
-            )
+    NavHost(navController = navController, startDestination = "list") {
+
+        composable("list") {
+            ListExpenseScreen(navController = navController, listExpenseViewModel = listExpenseViewModel)
         }
 
         composable("create") {
             val createExpenseViewModel: CreateExpenseViewModel = hiltViewModel()
-            CreateExpenseScreen(navController = navController,
-                createExpenseViewModel)
+            CreateExpenseScreen(navController = navController, createExpenseViewModel)
         }
+
+        composable("details/{id}") { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getString("id")
+            val expense = listExpenseViewModel.getExpenseById(itemId!!)
+            DetailsExpenseScreen(navController = navController, expense)
+        }
+
+        composable("list/{id}") { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getString("id")
+            val listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
+
+
+            LaunchedEffect(Unit) {
+                listExpenseViewModel.deleteExpenseById(itemId!!)
+            }
+
+            ListExpenseScreen(navController = navController, listExpenseViewModel = listExpenseViewModel)
+        }
+
+
+
+
+        // Add similar composable for "edit/{id}" if needed
     }
 }
+
+
 

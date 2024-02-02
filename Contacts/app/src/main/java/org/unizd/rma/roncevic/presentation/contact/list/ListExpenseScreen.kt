@@ -16,9 +16,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import coil.compose.rememberImagePainter
 import org.unizd.rma.roncevic.R
-
 @Composable
 fun ListExpenseScreen(
     navController: NavController,
@@ -57,33 +59,35 @@ fun ListExpenseScreen(
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = item.name)
                         Spacer(modifier = Modifier.width(5.dp))
-                        Text(text = item.amount)
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Text(text = item.category)
-                        Spacer(modifier = Modifier.width(5.dp))
-                        //date
-                        Text(text = item.date.toString())
 
-                        Spacer(modifier = Modifier.width(16.dp))
-
-                        if (item.imageUri.path?.isNotEmpty() == true) {
-                            Image(
-                                modifier = Modifier.padding(16.dp, 16.dp).width(40.dp).height(40.dp),
-                                painter = rememberImagePainter(item.imageUri),
-                                contentDescription = "Image")
-                        } else {
-                            Image(
-                                modifier = Modifier.padding(16.dp, 16.dp),
-                                painter = painterResource(id = R.drawable.ic_image),
-                                contentDescription = "Image")
+                        Button(onClick = {
+                            navController.navigate("details/${item.id}")
+                        }) {
+                            Text(text = "See details")
                         }
-                        
+
+                        Spacer(modifier = Modifier.width(5.dp))
+
+                        Button(onClick = {
+                            navController.navigate("edit/${item.id}")
+                        }) {
+                            Text(text = "Edit")
+                        }
+
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Button(onClick = {
+                            navController.navigate("list/${item.id}")
+                        }) {
+                            Text(text = "Delete")
+                        }
                     }
-                    
                 }
             }
         }
     }
 }
+
+
+
 
 

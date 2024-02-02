@@ -16,7 +16,7 @@ class CreateExpenseViewModel @Inject constructor(
     private val _errorMessage = mutableStateOf("")
     private val _name = mutableStateOf("")
     private val _amount = mutableStateOf("")
-    private val _category = mutableStateOf("")
+    private val _category = mutableStateOf("Other")
     private val _date = mutableStateOf("")
     private val _imageUri = mutableStateOf("")
 

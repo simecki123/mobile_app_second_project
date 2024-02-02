@@ -5,7 +5,10 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import org.unizd.rma.roncevic.domain.interfaces.usecases.DeleteExpenseUseCase
 import org.unizd.rma.roncevic.domain.interfaces.usecases.GetAllExpenseUseCase
+import org.unizd.rma.roncevic.domain.interfaces.usecases.UpdateExpenseUseCase
+import org.unizd.rma.roncevic.domain.models.ExpenseRequestEntity
 import org.unizd.rma.roncevic.domain.models.ExpenseResponseEntity
 import java.time.LocalDate
 import javax.inject.Inject
@@ -33,7 +36,9 @@ fun ExpenseResponseEntity.toExpenseListResponseModel():
 
 @HiltViewModel
 class ListExpenseViewModel @Inject constructor(
-    private val getAllExpenseUseCase: GetAllExpenseUseCase
+    private val getAllExpenseUseCase: GetAllExpenseUseCase,
+    private val deleteExpenseUseCase: DeleteExpenseUseCase,
+    private val updateExpenseUseCase: UpdateExpenseUseCase
 ): ViewModel() {
     private val _errorMessage = mutableStateOf("")
     private val _expenses = mutableStateListOf<ExpenseListResponseModel>()
@@ -58,4 +63,40 @@ class ListExpenseViewModel @Inject constructor(
             _errorMessage.value = "Greška ${e.message}"
         }
     }
+
+    fun getExpenseById(id: String): ExpenseListResponseModel {
+        for (e: ExpenseListResponseModel in _expenses){
+            if (e.id == id) {
+                return e
+            }
+        }
+
+        return ExpenseListResponseModel(
+            id = "",
+            name = "",
+            amount = "",
+            category = "",
+            date = "",
+            imageUri = Uri.EMPTY // You may need to initialize it properly based on your requirements
+        )
+    }
+
+    suspend fun deleteExpenseById(id: String) {
+        val ide = id.toInt()
+        println("Uslo u metodu")
+        deleteExpenseUseCase.execute(ide)
+
+        getExpenses()
+
+
+    }
+
+    suspend fun updateExpense(id: String, data: ExpenseRequestEntity) {
+        val ide = id.toInt()
+        updateExpenseUseCase.execute(ide, data)
+    }
+
+
+
+
 }

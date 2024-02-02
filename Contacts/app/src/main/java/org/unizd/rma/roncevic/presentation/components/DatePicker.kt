@@ -21,24 +21,22 @@ import java.text.SimpleDateFormat
 
 import java.util.*
 @Composable
-fun showDatePicker(context: Context, createExpenseViewModel: CreateExpenseViewModel){
-
-    val year: Int
-    val month: Int
-    val day: Int
+fun showDatePicker(context: Context, createExpenseViewModel: CreateExpenseViewModel) {
 
     val calendar = Calendar.getInstance()
-    year = calendar.get(Calendar.YEAR)
-    month = calendar.get(Calendar.MONTH)
-    day = calendar.get(Calendar.DAY_OF_MONTH)
-    calendar.time = Date()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val date = remember { mutableStateOf("") }
+    val initialDate = remember { mutableStateOf(formatDate(calendar.time)) }
+    val date = remember { mutableStateOf(initialDate.value) }
+
     val datePickerDialog = DatePickerDialog(
         context,
-        {_: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            date.value = "$dayOfMonth/${month + 1}/$year"
-            createExpenseViewModel.onDateChange(date.toString())
+        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+            val formattedDate = "$dayOfMonth/${month + 1}/$year"
+            date.value = formattedDate
+            createExpenseViewModel.onDateChange(formattedDate)
         }, year, month, day
     )
 
@@ -56,7 +54,6 @@ fun showDatePicker(context: Context, createExpenseViewModel: CreateExpenseViewMo
             Text(text = "Open Date Picker")
         }
     }
-
 }
 
 // Function to format the date as needed
