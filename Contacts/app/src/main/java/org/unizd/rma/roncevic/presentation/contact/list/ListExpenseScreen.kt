@@ -69,7 +69,7 @@ fun ListExpenseScreen(
                         Spacer(modifier = Modifier.width(5.dp))
 
                         Button(onClick = {
-                            navController.navigate("edit/${item.id}")
+                            //navController.navigate("edit/${item.id}")
                         }) {
                             Text(text = "Edit")
                         }

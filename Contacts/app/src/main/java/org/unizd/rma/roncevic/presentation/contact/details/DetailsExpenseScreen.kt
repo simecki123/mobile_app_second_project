@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import org.unizd.rma.roncevic.domain.models.ExpenseResponseEntity
 import org.unizd.rma.roncevic.presentation.contact.list.ExpenseListResponseModel
 import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseViewModel
 
@@ -29,8 +30,15 @@ import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseViewModel
 @Composable
 fun DetailsExpenseScreen(
     navController: NavController,
-    expenseListResponseModel: ExpenseListResponseModel
+    detailsExpenseViewModel: DetailsExpenseViewModel,
+    id: String
 ) {
+
+    LaunchedEffect(Unit,
+        block = {
+            detailsExpenseViewModel.loadExpenseDetails(id)
+        })
+    var expense: ExpenseResponseEntity? = detailsExpenseViewModel.expense
 
 
     Scaffold(
@@ -57,34 +65,34 @@ fun DetailsExpenseScreen(
         ){
             Text(text = "Name of expense")
             Spacer(modifier = Modifier.width(16.dp))
-            Text(expenseListResponseModel.name)
+            Text(expense!!.name)
             Spacer(modifier = Modifier.width(16.dp))
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(text = "Amount of money")
             Spacer(modifier = Modifier.width(16.dp))
-            Text(expenseListResponseModel.amount)
+            Text(expense.amount.toString())
             Spacer(modifier = Modifier.width(16.dp))
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(text = "Category")
             Spacer(modifier = Modifier.width(16.dp))
-            Text(expenseListResponseModel.category)
+            Text(expense.category)
             Spacer(modifier = Modifier.width(16.dp))
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(text = "Date")
             Spacer(modifier = Modifier.width(16.dp))
-            Text(expenseListResponseModel.date)
+            Text(expense.date)
             Spacer(modifier = Modifier.width(16.dp))
             Spacer(modifier = Modifier.height(16.dp))
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            if (expenseListResponseModel.imageUri.path?.isNotEmpty() == true) {
+            if (expense.imageUri.path?.isNotEmpty() == true) {
                 Image(
                     modifier = Modifier.padding(16.dp, 16.dp),
-                    painter = rememberImagePainter(expenseListResponseModel.imageUri),
+                    painter = rememberImagePainter(expense.imageUri),
                     contentDescription = "Image")
             } else {
                 Image(

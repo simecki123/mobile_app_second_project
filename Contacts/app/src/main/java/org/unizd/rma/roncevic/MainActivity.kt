@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.unizd.rma.roncevic.presentation.contact.create.CreateExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.create.CreateExpenseViewModel
 import org.unizd.rma.roncevic.presentation.contact.details.DetailsExpenseScreen
+import org.unizd.rma.roncevic.presentation.contact.details.DetailsExpenseViewModel
 import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseViewModel
 import org.unizd.rma.roncevic.ui.theme.ExpenseTheme
@@ -51,6 +52,7 @@ fun DefaultPreview() {
 @Composable
 fun Router(navController: NavHostController) {
     val listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
+    val detailsExpenseViewModel: DetailsExpenseViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = "list") {
 
@@ -63,10 +65,13 @@ fun Router(navController: NavHostController) {
             CreateExpenseScreen(navController = navController, createExpenseViewModel)
         }
 
+        // Update these on new solution
         composable("details/{id}") { backStackEntry ->
             val itemId = backStackEntry.arguments?.getString("id")
-            val expense = listExpenseViewModel.getExpenseById(itemId!!)
-            DetailsExpenseScreen(navController = navController, expense)
+            //val expense = listExpenseViewModel.getExpenseById(itemId!!)
+            if (itemId != null) {
+                DetailsExpenseScreen(navController = navController, detailsExpenseViewModel = detailsExpenseViewModel , id = itemId)
+            }
         }
 
         composable("list/{id}") { backStackEntry ->

@@ -14,11 +14,13 @@ import org.unizd.rma.roncevic.domain.interfaces.ExpenseRepository
 import org.unizd.rma.roncevic.domain.interfaces.usecases.CreateExpenseUseCase
 import org.unizd.rma.roncevic.domain.interfaces.usecases.DeleteExpenseUseCase
 import org.unizd.rma.roncevic.domain.interfaces.usecases.GetAllExpenseUseCase
+import org.unizd.rma.roncevic.domain.interfaces.usecases.GetExpenseUseCase
 import org.unizd.rma.roncevic.domain.interfaces.usecases.UpdateExpenseUseCase
 import org.unizd.rma.roncevic.domain.repositories.ExpenseRepositoryImpl
 import org.unizd.rma.roncevic.domain.usecases.contact.CreateExpenseUseCaseImpl
 import org.unizd.rma.roncevic.domain.usecases.contact.DeleteExpenseUseCaseImpl
 import org.unizd.rma.roncevic.domain.usecases.contact.GetAllExpenseUseCaseImpl
+import org.unizd.rma.roncevic.domain.usecases.contact.GetExpenseUseCaseImpl
 import org.unizd.rma.roncevic.domain.usecases.contact.UpdateExpenseUseCaseImpl
 import javax.inject.Singleton
 
@@ -61,6 +63,12 @@ object AppModule {
     @Singleton
     fun providesDeleteExpenseUseCase(repository: ExpenseRepository): DeleteExpenseUseCase {
         return DeleteExpenseUseCaseImpl(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetExpenseUseCase(repository: ExpenseRepository): GetExpenseUseCase {
+        return GetExpenseUseCaseImpl(repository)
     }
 
     @Provides
