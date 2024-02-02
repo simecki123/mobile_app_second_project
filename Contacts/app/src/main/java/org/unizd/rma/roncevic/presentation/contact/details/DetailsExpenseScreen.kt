@@ -99,6 +99,7 @@ fun DetailsExpenseScreen(
                     modifier = Modifier.padding(16.dp, 16.dp),
                     painter = painterResource(id = org.unizd.rma.roncevic.R.drawable.ic_image),
                     contentDescription = "Image")
+
             }
 
         }
