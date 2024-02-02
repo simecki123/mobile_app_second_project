@@ -48,7 +48,6 @@ class ListExpenseViewModel @Inject constructor(
     suspend fun getExpenses() {
 
         try {
-            println("Uspilo")
             _expenses.clear()
             val list = getAllExpenseUseCase.execute()
             _expenses.addAll(list.map {
