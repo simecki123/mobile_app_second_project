@@ -69,6 +69,7 @@ object AppModule {
     @Singleton
     fun provideGetExpenseUseCase(repository: ExpenseRepository): GetExpenseUseCase {
         return GetExpenseUseCaseImpl(repository)
+
     }
 
     @Provides
