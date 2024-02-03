@@ -64,22 +64,8 @@ class ListExpenseViewModel @Inject constructor(
         }
     }
 
-    fun getExpenseById(id: String): ExpenseListResponseModel {
-        for (e: ExpenseListResponseModel in _expenses){
-            if (e.id == id) {
-                return e
-            }
-        }
 
-        return ExpenseListResponseModel(
-            id = "",
-            name = "",
-            amount = "",
-            category = "",
-            date = "",
-            imageUri = Uri.EMPTY // You may need to initialize it properly based on your requirements
-        )
-    }
+
 
     suspend fun deleteExpenseById(id: String) {
         val ide = id.toInt()
@@ -91,10 +77,7 @@ class ListExpenseViewModel @Inject constructor(
 
     }
 
-    suspend fun updateExpense(id: String, data: ExpenseRequestEntity) {
-        val ide = id.toInt()
-        updateExpenseUseCase.execute(ide, data)
-    }
+
 
 
 

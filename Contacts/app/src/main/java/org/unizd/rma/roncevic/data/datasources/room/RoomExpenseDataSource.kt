@@ -27,8 +27,9 @@ class RoomExpenseDataSource constructor(private val dao: ExpenseDao) : ExpenseDa
         dao.deleteById(id)
     }
 
-    override suspend fun update(id: Int, expense: ExpenseRequestEntity) {
-        dao.update(id, expense.name, expense.amount, expense.category, expense.date)
+    override suspend fun update(id: Int, name:String, amount:Double, category:String, date:String) {
+
+        dao.update(id, name, amount, category, date)
     }
 
     override suspend fun create(data: ExpenseRequestEntity) {

@@ -74,17 +74,9 @@ fun Router(navController: NavHostController) {
             }
         }
 
-        composable("list/{id}") { backStackEntry ->
-            val itemId = backStackEntry.arguments?.getString("id")
-            val listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
 
 
-            LaunchedEffect(Unit) {
-                listExpenseViewModel.deleteExpenseById(itemId!!)
-            }
 
-            ListExpenseScreen(navController = navController, listExpenseViewModel = listExpenseViewModel)
-        }
 
 
 

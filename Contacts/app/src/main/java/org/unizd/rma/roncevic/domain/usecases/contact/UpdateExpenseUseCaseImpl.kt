@@ -6,7 +6,7 @@ import org.unizd.rma.roncevic.domain.models.ExpenseRequestEntity
 
 class UpdateExpenseUseCaseImpl constructor(private val expenseRepository: ExpenseRepository):
     UpdateExpenseUseCase {
-    override suspend fun execute(id: Int, data: ExpenseRequestEntity) {
-        return expenseRepository.updateExpense(id, data)
+    override suspend fun execute(id: Int, name:String, amount:Double, category:String, date:String) {
+        return expenseRepository.updateExpense(id, name, amount, category, date)
     }
 }

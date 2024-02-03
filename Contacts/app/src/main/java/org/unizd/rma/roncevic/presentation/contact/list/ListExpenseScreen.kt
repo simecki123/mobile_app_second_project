@@ -1,9 +1,11 @@
 package org.unizd.rma.roncevic.presentation.contact.list
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -20,6 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import coil.compose.rememberImagePainter
+import kotlinx.coroutines.runBlocking
 import org.unizd.rma.roncevic.R
 @Composable
 fun ListExpenseScreen(
@@ -51,11 +54,13 @@ fun ListExpenseScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
+                .horizontalScroll(rememberScrollState())
         ) {
             LazyColumn(modifier = Modifier.fillMaxHeight() ) {
+                var num = 1
                 items(listExpenseViewModel.expenses) {item ->
                     Row (modifier = Modifier.padding(2.dp)){
-                        Text(text = item.id)
+                        Text(text = num.toString())
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = item.name)
                         Spacer(modifier = Modifier.width(5.dp))
@@ -68,24 +73,28 @@ fun ListExpenseScreen(
 
                         Spacer(modifier = Modifier.width(5.dp))
 
-                        Button(onClick = {
-                            //navController.navigate("edit/${item.id}")
-                        }) {
-                            Text(text = "Edit")
-                        }
+
 
                         Spacer(modifier = Modifier.width(5.dp))
                         Button(onClick = {
-                            navController.navigate("list/${item.id}")
+                            runBlocking {
+                                listExpenseViewModel.deleteExpenseById(item.id)
+                                navController.navigate("list")
+                            }
                         }) {
                             Text(text = "Delete")
                         }
                     }
+                    num += 1
                 }
+
             }
+
         }
     }
 }
+
+
 
 
 

@@ -49,7 +49,7 @@ fun DetailsExpenseScreen(
                 },
                 actions = {
                     Button(onClick = {
-                        navController.navigate("list")
+                        navController.popBackStack()
                     }) {
                         Text(text = "Back")
                     }

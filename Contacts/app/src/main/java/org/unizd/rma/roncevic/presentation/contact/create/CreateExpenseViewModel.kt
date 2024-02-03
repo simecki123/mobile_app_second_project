@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.unizd.rma.roncevic.domain.interfaces.usecases.CreateExpenseUseCase
 import org.unizd.rma.roncevic.domain.models.ExpenseRequestEntity
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -17,7 +20,8 @@ class CreateExpenseViewModel @Inject constructor(
     private val _name = mutableStateOf("")
     private val _amount = mutableStateOf("")
     private val _category = mutableStateOf("Other")
-    private val _date = mutableStateOf("")
+    private val calendar = Calendar.getInstance()
+    private val _date = mutableStateOf(formatDate(calendar.time))
     private val _imageUri = mutableStateOf("")
 
     val name : String
@@ -71,4 +75,9 @@ class CreateExpenseViewModel @Inject constructor(
             _errorMessage.value = "Error ${e.message}"
         }
     }
+}
+
+private fun formatDate(date: Date): String {
+    val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    return simpleDateFormat.format(date)
 }

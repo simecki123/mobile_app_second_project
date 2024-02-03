@@ -31,11 +31,13 @@ fun showDatePicker(context: Context, createExpenseViewModel: CreateExpenseViewMo
     val initialDate = remember { mutableStateOf(formatDate(calendar.time)) }
     val date = remember { mutableStateOf(initialDate.value) }
 
+
     val datePickerDialog = DatePickerDialog(
         context,
         { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             val formattedDate = "$dayOfMonth/${month + 1}/$year"
             date.value = formattedDate
+            println(formattedDate)
             createExpenseViewModel.onDateChange(formattedDate)
         }, year, month, day
     )
