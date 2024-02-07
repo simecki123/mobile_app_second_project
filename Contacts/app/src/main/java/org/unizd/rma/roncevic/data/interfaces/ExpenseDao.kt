@@ -27,7 +27,7 @@ interface ExpenseDao {
     suspend fun getById(id: Int): ExpenseRoomEntity?
     @Query("DELETE FROM expenses WHERE id = :id")
     suspend fun deleteById(id: Int)
-    @Query("UPDATE expenses SET name = :name & amount = :amount & category = :category & date = :date WHERE id = :id")
+    @Query("UPDATE expenses SET name = :name, amount = :amount, category = :category, date = :date WHERE id = :id")
     suspend fun update(id: Int, name: String, amount: Double, category: String, date: String)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(expense: ExpenseRoomEntity)
