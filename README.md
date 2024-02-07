@@ -35,12 +35,6 @@ This Android Studio Kotlin mobile app serves as an expense tracker, allowing use
 
 ![Expense List](![image](https://github.com/simecki123/mobile_app_second_project/assets/95432252/771e6714-d7c6-4cf3-b84f-077750ffecb2)
 
-*View of all expenses for a selected month*
-
-![Expense Details](<a href="https://www.flaticon.com/free-icons/budget" title="budget icons">Budget icons created by Freepik - Flaticon</a>)
-*Details of a specific expense*
-
-![Expense Details](![Expense Details](<a href="https://www.flaticon.com/free-icons/budget" title="budget icons">Budget icons created by Freepik - Flaticon</a>))
 
 ## Getting Started
 
