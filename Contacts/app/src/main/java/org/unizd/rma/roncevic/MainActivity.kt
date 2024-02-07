@@ -14,6 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 import dagger.hilt.android.AndroidEntryPoint
+import org.unizd.rma.roncevic.presentation.contact.analysis.AnalysisExpenseScreen
+import org.unizd.rma.roncevic.presentation.contact.analysis.AnalysisExpenseViewModel
 import org.unizd.rma.roncevic.presentation.contact.create.CreateExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.create.CreateExpenseViewModel
 import org.unizd.rma.roncevic.presentation.contact.details.DetailsExpenseScreen
@@ -53,6 +55,8 @@ fun DefaultPreview() {
 fun Router(navController: NavHostController) {
     val listExpenseViewModel: ListExpenseViewModel = hiltViewModel()
     val detailsExpenseViewModel: DetailsExpenseViewModel = hiltViewModel()
+    val createExpenseViewModel: CreateExpenseViewModel = hiltViewModel()
+    val analysisExpenseViewModel: AnalysisExpenseViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = "list") {
 
@@ -61,7 +65,7 @@ fun Router(navController: NavHostController) {
         }
 
         composable("create") {
-            val createExpenseViewModel: CreateExpenseViewModel = hiltViewModel()
+
             CreateExpenseScreen(navController = navController, createExpenseViewModel)
         }
 
@@ -74,7 +78,9 @@ fun Router(navController: NavHostController) {
             }
         }
 
-
+        composable("analyse") {
+            AnalysisExpenseScreen(navController = navController, analysisExpenseViewModel)
+        }
 
 
 

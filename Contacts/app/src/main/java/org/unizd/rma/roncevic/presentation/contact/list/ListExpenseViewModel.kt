@@ -37,8 +37,7 @@ fun ExpenseResponseEntity.toExpenseListResponseModel():
 @HiltViewModel
 class ListExpenseViewModel @Inject constructor(
     private val getAllExpenseUseCase: GetAllExpenseUseCase,
-    private val deleteExpenseUseCase: DeleteExpenseUseCase,
-    private val updateExpenseUseCase: UpdateExpenseUseCase
+    private val deleteExpenseUseCase: DeleteExpenseUseCase
 ): ViewModel() {
     private val _errorMessage = mutableStateOf("")
     private val _expenses = mutableStateListOf<ExpenseListResponseModel>()
