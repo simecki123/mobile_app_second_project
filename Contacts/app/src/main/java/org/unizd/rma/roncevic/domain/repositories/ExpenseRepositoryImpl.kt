@@ -20,9 +20,9 @@ class ExpenseRepositoryImpl constructor(private val expenseDataSource: ExpenseDa
         return expenseDataSource.delete(id)
     }
 
-    override suspend fun updateExpense(id: Int, name:String, amount:Double, category:String, date:String) {
+    override suspend fun updateExpense(id: Int, name:String, amount:Double, category:String, date:String, imageUri: String) {
 
-        expenseDataSource.update(id, name, amount, category, date)
+        expenseDataSource.update(id, name, amount, category, date, imageUri)
     }
 
     override suspend fun createExpense(data: ExpenseRequestEntity) {

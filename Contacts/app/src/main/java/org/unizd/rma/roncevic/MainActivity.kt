@@ -22,7 +22,10 @@ import org.unizd.rma.roncevic.presentation.contact.details.DetailsExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.details.DetailsExpenseViewModel
 import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseScreen
 import org.unizd.rma.roncevic.presentation.contact.list.ListExpenseViewModel
+import org.unizd.rma.roncevic.presentation.contact.update.UpdateExpenseScreen
+import org.unizd.rma.roncevic.presentation.contact.update.UpdateExpenseViewModel
 import org.unizd.rma.roncevic.ui.theme.ExpenseTheme
+import kotlin.contracts.contract
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -57,6 +60,7 @@ fun Router(navController: NavHostController) {
     val detailsExpenseViewModel: DetailsExpenseViewModel = hiltViewModel()
     val createExpenseViewModel: CreateExpenseViewModel = hiltViewModel()
     val analysisExpenseViewModel: AnalysisExpenseViewModel = hiltViewModel()
+    val updateExpenseViewModel: UpdateExpenseViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = "list") {
 
@@ -80,6 +84,14 @@ fun Router(navController: NavHostController) {
 
         composable("analyse") {
             AnalysisExpenseScreen(navController = navController, analysisExpenseViewModel)
+        }
+
+        composable("update{id}"){ backStackEntry ->
+            val itemId = backStackEntry.arguments?.getString("id")
+            if (itemId != null) {
+                UpdateExpenseScreen(navController = navController, updateExpenseViewModel, itemId )
+            }
+
         }
 
 

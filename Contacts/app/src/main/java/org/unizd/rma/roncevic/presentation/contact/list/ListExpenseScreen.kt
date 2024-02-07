@@ -100,6 +100,18 @@ fun ListExpenseScreen(
                             }) {
                                 Text(text = "Delete")
                             }
+
+                            Spacer(modifier = Modifier.width(5.dp))
+
+                            Spacer(modifier = Modifier.width(5.dp))
+
+                            Button(onClick = {
+                                runBlocking {
+                                    navController.navigate("update${item.id}")
+                                }
+                            }) {
+                                Text(text = "Update")
+                            }
                         }
                     }
                     num += 1
