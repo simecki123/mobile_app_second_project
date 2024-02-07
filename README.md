@@ -1,6 +1,7 @@
 # Mobile App: Expense Tracker
 
-![App Logo](app_logo.png)
+![App Logo](![image](https://github.com/simecki123/mobile_app_second_project/assets/95432252/10e68104-b623-4260-8f20-4e0ee89c28e3)
+)
 
 ## Overview
 
